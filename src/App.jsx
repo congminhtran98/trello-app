@@ -1,58 +1,74 @@
 // import { useState } from "react";
 // import reactLogo from "./assets/react.svg";
 // import viteLogo from "/vite.svg";
-import { useMediaQuery } from "@mui/material";
+import { useMediaQuery, AppBar, Toolbar, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import {
-  useColorScheme,
-} from '@mui/material/styles';
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import { useColorScheme } from "@mui/material/styles";
 // import TabIndicator from '@mui/material/Tabs/TabIndicator';
-//dmm
 
 function ModeToggle() {
   const { mode, setMode } = useColorScheme();
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
-  console.log(prefersDarkMode)
+  console.log(prefersDarkMode);
   return (
     <Button
       onClick={() => {
-        setMode(mode === 'light' ? 'dark' : 'light');
+        setMode(mode === "light" ? "dark" : "light");
       }}
     >
-      {mode === 'light' ? 'Turn dark' : 'Turn light'}
+      {mode === "light" ? "Turn dark" : "Turn light"}
     </Button>
   );
 }
 
 function App() {
-  // const [count, setCount] = useState(0);
-
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <ModeToggle />
-      <Button variant="contained">Hello world</Button>
-      {/* <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p> */}
-    </div>
+    <Container
+      disableGutters
+      maxWidth={false}
+      sx={{
+        height: "100vh",
+      }}
+    >
+      <Box
+        sx={{
+          width: "100%",
+          height: (theme) => theme.trelloCustom.appBarHeight,
+          backgroundColor: "primary.light",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <ModeToggle />
+      </Box>
+
+      <Box
+        sx={{
+          width: "100%",
+          height: (theme) => theme.trelloCustom.boardBarHeight,
+          backgroundColor: "primary.dark",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        Board Bar
+      </Box>
+      <Box
+        sx={{
+          width: "100%",
+          height: (theme) =>
+            `calc(100% - ${theme.trelloCustom.appBarHeight} + ${theme.trelloCustom.boardBarHeight})`,
+          backgroundColor: "primary.main",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        Board Content
+      </Box>
+    </Container>
   );
 }
 
